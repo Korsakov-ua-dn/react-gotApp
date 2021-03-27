@@ -37,7 +37,6 @@ export default class RandomChar extends Component {
 
     render() {
         const { char, loading, error } = this.state
-        
         // if (loading) {
         //     return <Spinner/> // если функция render увидит return далее код не пойдет
         // }
@@ -58,7 +57,7 @@ export default class RandomChar extends Component {
 
 const View = ({char}) => {
     const {name, gender, born, died, culture} = char;
-    console.log(char);
+    // console.log(char);
     return (
         <>
             <h4>Random Character: {name}</h4>
