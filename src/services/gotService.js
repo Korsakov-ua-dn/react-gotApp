@@ -18,6 +18,15 @@ export default class GotService {
         const character = await this.getResourse(`characters/${id}`);
         return this._transformCharacter(character);
     }
+    // noResult(obj) {
+    //     const res = [...obj];
+    //     res.map((item) => {
+    //         item.value
+    //     });
+    //     return {
+            
+    //     }
+    // }
     getAllHouses() {
         return this.getResourse(`houses/`);
     }
@@ -31,12 +40,8 @@ export default class GotService {
         return this.getResourse(`books/${id}`)
     }
     _transformCharacter(char) {
-        for ( let key in char) {
-            if (!char[key]) {
-                char[key] = "no result"
-            }
-        }
         return {
+            url: char.url,
             name: char.name,
             gender: char.gender,
             born: char.born,
