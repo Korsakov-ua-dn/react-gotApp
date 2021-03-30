@@ -40,6 +40,11 @@ export default class GotService {
         return this.getResourse(`books/${id}`)
     }
     _transformCharacter(char) {
+        for (let key in char) {
+            if (!char[key]) {
+                char[key] = "no result"
+            }
+        }
         return {
             url: char.url,
             name: char.name,
