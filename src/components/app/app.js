@@ -3,22 +3,22 @@ import React, {Component} from 'react';
 import {Col, Row, Container, Button} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
-import ItemList from '../itemList';
 import ErrorMessage from '../error';
-import PersonDetails from '../personeDetails';
+import CharacterPage from '../characterPage'
 import './app.css';
 
 export default class App extends Component {
     state = {
         showRandomChar: true,
         error: false,
-        selectedChar: null
     }
-    onCharSelected = (id) => {
+
+    componentDidCatch() {
         this.setState({
-            selectedChar: id
+            error: true
         })
     }
+
     toggleRandomChar = () => {
         this.setState((state) => {
             return {
@@ -47,14 +47,7 @@ export default class App extends Component {
                             </Button>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col md='6'>
-                            <ItemList onCharSelected={this.onCharSelected} />
-                        </Col>
-                        <Col md='6'>
-                            <PersonDetails charId={this.state.selectedChar} />
-                        </Col>
-                    </Row>
+                    <CharacterPage/>
                 </Container>
             </>
         );

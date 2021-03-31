@@ -45,8 +45,10 @@ export default class GotService {
                 char[key] = "no result"
             }
         }
+        const id = char.url.match(/\d/g).reduce((acc, cur) => acc + cur);
+            // "url": "https://www.anapioficeandfire.com/api/characters/130" из url получаю массив чисел через запятую далее схлопываю.
         return {
-            url: char.url,
+            id: id,
             name: char.name,
             gender: char.gender,
             born: char.born,
