@@ -2,7 +2,7 @@ export default class GotService {
     constructor() {
         this._apiBase = 'https://www.anapioficeandfire.com/api/'
     }
-    async getResourse(url) {
+    getResourse = async (url) => {
         const res = await fetch(`${this._apiBase}${url}`);
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}` +
@@ -10,34 +10,30 @@ export default class GotService {
         }
         return await res.json();
     }
-    async getAllCharacters() {
+    getAllCharacters = async () => {
         const res = await this.getResourse(`characters?page=5&pageSize=10`);
         return res.map(this._transformCharacter);
     }
-    async getCharacter(id) {
+    getCharacter = async (id) => {
         const character = await this.getResourse(`characters/${id}`);
         return this._transformCharacter(character);
     }
-    // noResult(obj) {
-    //     const res = [...obj];
-    //     res.map((item) => {
-    //         item.value
-    //     });
-    //     return {
-            
-    //     }
-    // }
-    getAllHouses() {
-        return this.getResourse(`houses/`);
+    
+    getAllHouses = async () => {
+        const res = await this.getResourse(`houses/`);
+        return res.map(this._transformHouse);
     }
-    getHouse(id) {
-        return this.getResourse(`houses/${id}`)
+    getHouse = async (id) => {
+        const house = await this.getResourse(`houses/${id}`);
+        return this._transformHouse(house);
     }
-    getAllBooks() {
-        return this.getResourse(`books/`);
+    getAllBooks = async () => {
+        const res = await this.getResourse(`books/`);
+        return res.map(this._transformBook);
     }
-    getBooks(id) {
-        return this.getResourse(`books/${id}`)
+    getBook = async (id) => {
+        const book = await this.getResourse(`books/${id}`);
+        return this._transformBook(book);
     }
     _transformCharacter(char) {
         for (let key in char) {
@@ -57,7 +53,14 @@ export default class GotService {
         }
     }
     _transformHouse(house) {
+        for (let key in house) {
+            if (!house[key]) {
+                house[key] = "no result"
+            }
+        }
+        const id = house.url.match(/\d/g).reduce((acc, cur) => acc + cur);
         return {
+            id: id,
             name: house.name,
             region: house.region,
             words: house.words,
@@ -67,7 +70,14 @@ export default class GotService {
         }
     }
     _transformBook(book) {
+        for (let key in book) {
+            if (!book[key]) {
+                book[key] = "no result"
+            }
+        }
+        const id = book.url.match(/\d/g).reduce((acc, cur) => acc + cur);
         return {
+            id: id,
             name: book.name,
             numberOfPages: book.numberOfPages,
             publisher: book.publisher,
