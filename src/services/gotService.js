@@ -54,7 +54,7 @@ export default class GotService {
     }
     _transformHouse(house) {
         for (let key in house) {
-            if (!house[key]) {
+            if (!house[key].toString()) {
                 house[key] = "no result"
             }
         }
