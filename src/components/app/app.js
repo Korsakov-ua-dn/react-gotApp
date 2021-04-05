@@ -15,7 +15,7 @@ export default class App extends Component {
     gotService = new gotService();
 
     state = {
-        showRandomChar: true,
+        showRandomChar: false,
         error: false,
     }
 

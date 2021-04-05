@@ -1,4 +1,8 @@
+.app {    
+    background: blue url('./got.jpeg') center center no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
 .toggle-btn {
-    margin-left: 15px;
     margin-bottom: 40px;
 }
