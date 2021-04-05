@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import ItemList from '../../itemList';
-import ErrorMessage from '../../error';
-import gotService from '../../../services/gotService'
-import RowBlock from '../../rowBlock';
-import ItemDetails, {Field} from '../../itemDetails';
+import ItemList from '../itemList';
+import ErrorMessage from '../error';
+import gotService from '../../services/gotService'
+import RowBlock from '../rowBlock';
+import ItemDetails, {Field} from '../itemDetails';
 
-export default class BookPage extends Component {
+export default class CharacterPage extends Component {
 
     gotService = new gotService();
 
@@ -34,17 +34,18 @@ export default class BookPage extends Component {
 
         const itemList = (
             <ItemList 
-            onItemSelected={this.onItemSelected}
-            getData={this.gotService.getAllBooks}
-            renderItem={(item) => item.name} />
+                onItemSelected={this.onItemSelected}
+                getData={this.gotService.getAllCharacters}
+                renderItem={(item) => item.name} />
         )
         const itemDetails = (
             <ItemDetails 
                 itemId={this.state.selectedItem}
-                getId={this.gotService.getBook} >
-                    <Field field='numberOfPages' lable='NumberOfPages' />
-                    <Field field='publisher' lable='Publisher' />
-                    <Field field='released' lable='Released' />
+                getId={this.gotService.getCharacter} >
+                    <Field field='gender' lable='Gender' />
+                    <Field field='born' lable='Born' />
+                    <Field field='died' lable='Died' />
+                    <Field field='culture' lable='Culture' />
             </ItemDetails>
         )
 

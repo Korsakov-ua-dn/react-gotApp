@@ -1,6 +1,6 @@
 export default class GotService {
     constructor() {
-        this._apiBase = 'https://www.anapioficeandfire.com/api/'
+        this._apiBase = 'https://www.anapioficeandfire.com/api'
     }
     getResourse = async (url) => {
         const res = await fetch(`${this._apiBase}${url}`);
@@ -11,28 +11,28 @@ export default class GotService {
         return await res.json();
     }
     getAllCharacters = async () => {
-        const res = await this.getResourse(`characters?page=5&pageSize=10`);
+        const res = await this.getResourse(`/characters?page=5&pageSize=10`);
         return res.map(this._transformCharacter);
     }
     getCharacter = async (id) => {
-        const character = await this.getResourse(`characters/${id}`);
+        const character = await this.getResourse(`/characters/${id}`);
         return this._transformCharacter(character);
     }
     
     getAllHouses = async () => {
-        const res = await this.getResourse(`houses/`);
+        const res = await this.getResourse(`/houses/`);
         return res.map(this._transformHouse);
     }
     getHouse = async (id) => {
-        const house = await this.getResourse(`houses/${id}`);
+        const house = await this.getResourse(`/houses/${id}`);
         return this._transformHouse(house);
     }
     getAllBooks = async () => {
-        const res = await this.getResourse(`books/`);
+        const res = await this.getResourse(`/books/`);
         return res.map(this._transformBook);
     }
     getBook = async (id) => {
-        const book = await this.getResourse(`books/${id}`);
+        const book = await this.getResourse(`/books/${id}`);
         return this._transformBook(book);
     }
     _transformCharacter(char) {
