@@ -3,6 +3,7 @@ import './randomChar.css';
 import gotService from '../../services/gotService';
 import Spinner from '../spinner/';
 import ErrorMessage from '../error/errorMessage';
+import PropTypes from 'prop-types';
 
 
 export default class RandomChar extends Component {
@@ -15,9 +16,16 @@ export default class RandomChar extends Component {
         error: false
     }
 
+    // static defaultProps = {
+    //     interval: 15000
+    // }
+    static propTypes = {
+        interval: PropTypes.number
+    } // выводит в консоль сообщение об ошибке
+
     componentDidMount() {
         this.updateChar();
-        this.timerId = setInterval(this.updateChar, 1500);
+        this.timerId = setInterval(this.updateChar, this.props.interval);
     }
     componentWillUnmount() {
         clearInterval(this.timerId);
@@ -63,6 +71,19 @@ export default class RandomChar extends Component {
         );
     }
 }
+
+// RandomChar.propTypes = {
+//     //  список всех проперти - имя определенного  проперти - имя компонента
+//     interval: (props, propName, componentName) => {
+//         const value = props[propName]; // получаем текущее значение интервала
+//         if (typeof value === 'number' && !isNaN(value)) {
+//             return null
+//         }
+//         return new TypeError(`${componentName}: ${propName} must be a number`)
+//     }
+// } // выводит в консоль сообщение об ошибке
+
+
 
 const View = ({char}) => {
     const {name, gender, born, died, culture} = char;

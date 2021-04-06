@@ -55,3 +55,7 @@ export default class HousePage extends Component {
         )
     }
 }
+
+ItemList.defaultProps = {
+    onItemSelected: () => {}
+}

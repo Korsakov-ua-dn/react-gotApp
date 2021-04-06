@@ -3,6 +3,12 @@
     background-size: cover;
     height: 100vh;
 }
+.app h1 {
+    color: white;
+}
 .toggle-btn {
     margin-bottom: 40px;
+}
+.toggle-btn:focus {
+    outline: none;
 }

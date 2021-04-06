@@ -36,7 +36,7 @@ export default class App extends Component {
         if (this.state.error) {
             return <ErrorMessage/>
         }
-        const char = this.state.showRandomChar ? <RandomChar/> : null;
+        const char = this.state.showRandomChar ? <RandomChar interval={15000}/> : null;
         return (
             <Router>
                 <div className="app"> 
@@ -54,6 +54,7 @@ export default class App extends Component {
                                 </Button>
                             </Col>
                         </Row>
+                        <Route path='/' component={() => <h1>Welcome to GOT DB</h1>} exact/>
                         <Route path='/characters' exact component={CharacterPage}/>
                         <Route path='/houses' exact component={HousePage}/>
                         <Route path='/books' exact component={BookPage}/>
