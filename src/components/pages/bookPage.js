@@ -26,11 +26,11 @@ class BookPage extends Component {
 
         return (
             <ItemList 
-            onItemSelected={(itemId) => {
-                this.props.history.push(itemId)
-            }}
-            getData={this.gotService.getAllBooks}
-            renderItem={(item) => item.name} />
+                onItemSelected={(itemId) => {
+                    this.props.history.push(itemId)
+                }}
+                getData={this.gotService.getAllBooks}
+                renderItem={(item) => item.name} />
         )
     }
 }
