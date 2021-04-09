@@ -1,20 +1,26 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import './itemList.css';
-// import Spinner from '../spinner/spinner';
-// import PropTypes from 'prop-types';
-import withData from '../withData/withData';
-// import gotService from '../../services/gotService';
+import Spinner from '../spinner/spinner';
 
-class ItemList extends Component {
+function ItemList({renderItem, onItemSelected, getData}) {
 
-    renderItems(arr) {
+    const [itemList, updateList] = useState([]);
+    
+    useEffect(() => {
+        getData()
+            .then( (data) => {
+                updateList(data);
+            })
+    }, []); // пустой массив говорит хуку что эффект необходимо выполнить только при появлении компонента и его исчезновении
+
+    function renderItems(arr) {
         return arr.map((item) => {
             const {id} = item;
-            const lable = this.props.renderItem(item);
+            const lable = renderItem(item);
             return (
                 <li 
                     key={id} // не забыть обязательно присвоить уникальный ключ каждому новому элементу
-                    onClick={() =>  this.props.onItemSelected(id)}
+                    onClick={() => onItemSelected(id)}
                     className="list-group-item">
                     {lable}
                 </li>
@@ -22,50 +28,20 @@ class ItemList extends Component {
         })
     }
 
-    render() {
-        const {data} = this.props;
-        const items = this.renderItems(data);
+    const items = renderItems(itemList);
 
-        return (
-            <ul className="item-list list-group">
-                {items}
-            </ul>
-        );
+    if (!itemList) {
+        return <Spinner/> 
     }
+    return (
+        <ul className="item-list list-group">
+            {items}
+        </ul>
+    );
 }
 
-export default withData(ItemList);
-
-// ItemList.propTypes = {
-//     onItemSelected: PropTypes.func
+// ItemList.defaultProps = {
+//     onItemSelected: () => {}
 // }
 
-// const withData = (View, getData) => {
-//     return class extends Component {
-
-//         state = {
-//             data: null
-//         }
-    
-//         componentDidMount() {
-//             const {getData} = this.props
-//             getData()
-//                 .then( (data) => {
-//                     this.setState({
-//                         data
-//                     })
-//                 })
-//         }
-
-//         render() {
-//             const {data} = this.state
-//             if (!data) {
-//                 return <Spinner/> 
-//             }
-//             return <View {...this.props} data={data}/>
-//         }
-//     }
-//   }
-
-// const {getAllCharacters} = new gotService();
-// export default withData(ItemList, getAllCharacters);
+export default ItemList;
